@@ -8,4 +8,4 @@ Kérlek jelöld be, hogy melyik gyakorlati feladatokat oldottad meg!
 * [x] 2021.06.09. - Filmek, streamek gyakorlása (movie)
 * [x] 2021.06.15. - EB meccsek
 * [x] 2021.06.22. - Haszáltautó
-* [ ] 2021.06.25. - Bicikli sharing
+* [x] 2021.06.25. - Bicikli sharing
