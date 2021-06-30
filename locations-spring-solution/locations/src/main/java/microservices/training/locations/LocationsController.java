@@ -5,17 +5,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class LocationsController {
 
-    private List<Location> locations = new ArrayList<>(List.of(
-            new Location(1L, "name1", 2.22, 3.33),
-            new Location(2L, "name2", 5.55, 4.44)
-    ));
+    private LocationsService locationsService;
+
+    public LocationsController(LocationsService locationsService) {
+        this.locationsService = locationsService;
+    }
 
     @GetMapping("/")
-    public List<Location> getLocations() {
-        return locations;
+    public String getLocations() {
+        return locationsService.getLocations().stream()
+                .map(Location::toString)
+                .collect(Collectors.joining("<br>"));
     }
 }
