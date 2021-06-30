@@ -3,7 +3,7 @@ Spring Boot feladatok
 Kérlek jelöld be, hogy melyik gyakorlati feladatokat oldottad meg!
 
 * [x] Bevezetés a Spring Framework és Spring Boot használatába
-* [ ] Bevezetés a Spring Boot használatába
+* [x] Bevezetés a Spring Boot használatába
 * [ ] Spring Beanek
 * [ ] Konfiguráció Javaban
 * [ ] Build és futtatás Mavennel
