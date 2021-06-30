@@ -6,11 +6,11 @@ Bevezetés a JUnit használatába
 
 A  locations csomagba dolgozz!
 
-Hozz létre egy  Location osztályt,  name,  lat,  lon attribútumokkal! A  				 name attribútum  String típusú legyen! A szélességi és hosszúsági koordinátákat külön  double típusú attribútummal ábrázold!
+Hozz létre egy  locations.Location osztályt,  name,  lat,  lon attribútumokkal! A  				 name attribútum  String típusú legyen! A szélességi és hosszúsági koordinátákat külön  double típusú attribútummal ábrázold!
 
 Legyenek getter/setter metódusai, és konstruktora, ahol mind a három attribútumát meg lehet adni!
 
-Hozz létre egy  LocationParser osztályt, mely feladata szöveges értékből kinyerni egy kedvenc hely adatait! Legyen egy  public Location parse(String text) metódusa, mely a nevet és a koordinátákat vesszővel elválasztva várja (pl.  Budapest,47.497912,19.040235)! A tizedeshatároló karakter legyen a pont! Ez a metódus visszaad egy új példányt, kitöltve a megfelelő attribútum értékekkel. Írj rá egy  LocationTest osztályt, valamint egy  testParse() metódust, mely ezt a metódust teszteli!
+Hozz létre egy  LocationParser osztályt, mely feladata szöveges értékből kinyerni egy kedvenc hely adatait! Legyen egy  public locations.Location parse(String text) metódusa, mely a nevet és a koordinátákat vesszővel elválasztva várja (pl.  Budapest,47.497912,19.040235)! A tizedeshatároló karakter legyen a pont! Ez a metódus visszaad egy új példányt, kitöltve a megfelelő attribútum értékekkel. Írj rá egy  LocationTest osztályt, valamint egy  testParse() metódust, mely ezt a metódust teszteli!
 
 Futtatás Mavennel
 
@@ -30,7 +30,7 @@ Assert
 
 Hívd meg kétszer a  LocationParser  parse metódusát, és ellenőrizd, hogy két különböző példányt ad vissza!
 
-Írj a  Location osztályba egy  distanceFrom() metódust, mely a paraméterként átadott másik  Location-től való távolságot adja vissza! Használd a következő, Haversine algoritmust (vigyázz, máshogy kell paraméterezni)!
+Írj a  locations.Location osztályba egy  distanceFrom() metódust, mely a paraméterként átadott másik  locations.Location-től való távolságot adja vissza! Használd a következő, Haversine algoritmust (vigyázz, máshogy kell paraméterezni)!
 
 public static double distance(double lat1, double lat2, double lon1,
 double lon2, double el1, double el2) {
@@ -55,13 +55,13 @@ double lon2, double el1, double el2) {
 
 A  parse() metódusra írj olyan tesztesetet, mely egyszerre ellenőrzi a  name,  lat és  lon attribútumok értékét!
 
-Írj egy  LocationOperators osztályt, benne egy  List<Location> filterOnNorth(List<Location>) metódust, mely csak az északon lévő pontokat adja vissza ( lat > 0)!
+Írj egy  LocationOperators osztályt, benne egy  List<locations.Location> filterOnNorth(List<locations.Location>) metódust, mely csak az északon lévő pontokat adja vissza ( lat > 0)!
 
 Írj rá tesztesetet a  LocationOperatorsTest osztályban (ellenőrizz a nevekre)!
 
 Kivételkezelés és timeout tesztelése
 
-A  Location konstruktora dobjon  IllegalArgumentException kivételt, ha nem megfelelő számot kap! A szélesség értéke -90 és 90 közötti, a hosszúság értéke -180 és 180 közötti legyen! Írj rá teszteseteket!
+A  locations.Location konstruktora dobjon  IllegalArgumentException kivételt, ha nem megfelelő számot kap! A szélesség értéke -90 és 90 közötti, a hosszúság értéke -180 és 180 közötti legyen! Írj rá teszteseteket!
 
 Egymásba ágyazás
 
@@ -73,15 +73,15 @@ Hozz létre egy  LocationOperationsFeatureTest annotációt, és tedd rá arra a
 
 Tesztesetek ismétlése
 
-Teszteld az  isOnEquator() metódust! Vegyél fel egy tömbbe pár  Location objektumot, ezek egy része az egyenlítőn legyen! Tömbök tömbjét használj, azaz vegyél fel egy  boolean értéket is, hogy mely esetén kell a tesztelendő metódusnak  true értéket visszaadnia!
+Teszteld az  isOnEquator() metódust! Vegyél fel egy tömbbe pár  locations.Location objektumot, ezek egy része az egyenlítőn legyen! Tömbök tömbjét használj, azaz vegyél fel egy  boolean értéket is, hogy mely esetén kell a tesztelendő metódusnak  true értéket visszaadnia!
 
-Ismétlődő tesztekkel menj végig a tömbön, hívd meg az adott  Location  isOnEquator() metódusát, és vizsgáld, hogy a mellette megadott  boolean értéket adja-e vissza.
+Ismétlődő tesztekkel menj végig a tömbön, hívd meg az adott  locations.Location  isOnEquator() metódusát, és vizsgáld, hogy a mellette megadott  boolean értéket adja-e vissza.
 
 Paraméterezett tesztek
 
 Implementáld az előző feladatot az  isOnPrimeMeridian() metódusra, de most  MethodSource használatával!
 
-Tegyél ki egy CSV állományba négy koordinátát, valamint a köztük lévő távolságot méterben! (A  Location neve mindegy.) Példányosíts le egy  				 Location példányt az első két koordinátával, majd egy másikat a harmadik-negyedik paraméterrel, majd ellenőrizd, hogy a kettő közötti különbség az ötödik mezőben megadott értéket adja-e vissza.
+Tegyél ki egy CSV állományba négy koordinátát, valamint a köztük lévő távolságot méterben! (A  locations.Location neve mindegy.) Példányosíts le egy  				 locations.Location példányt az első két koordinátával, majd egy másikat a harmadik-negyedik paraméterrel, majd ellenőrizd, hogy a kettő közötti különbség az ötödik mezőben megadott értéket adja-e vissza.
 
 Dinamikus tesztek
 
@@ -89,9 +89,9 @@ Hozz létre egy paraméterezett tesztet, mely az egyenlítőn lévő kedvenc hel
 
 Tempdirectory extension
 
-Hozz létre egy  LocationService nevű osztályt, abban egy  void writeLocations(Path file, List<Location> locations), metódust, mely az első paraméterként megadott fájlba kiírja a második paraméterként megadott helyeket CSV (comma separated values) formátumban. A helyeket külön sorba írja ki, és a  name,  lat és  lon attribútumok értékeit egymástól vessző ( ,) karakterrel elválasztva.
+Hozz létre egy  LocationService nevű osztályt, abban egy  void writeLocations(Path file, List<locations.Location> locations), metódust, mely az első paraméterként megadott fájlba kiírja a második paraméterként megadott helyeket CSV (comma separated values) formátumban. A helyeket külön sorba írja ki, és a  name,  lat és  lon attribútumok értékeit egymástól vessző ( ,) karakterrel elválasztva.
 
-Írj egy tesztesetet, mely teszteli a kiírást, méghozzá úgy, hogy kiír pár  				 Location példányt, és beolvassa a sorokat egy  List<String> adatszerkezetbe (használd a  Files.readAllLines() metódust)! Utána ebben a listában ellenőrizd szúrópróbaszerűen pl. a második elemet, hogy megfelelő-e. Pl.  Budapest,47.497912,19.040235.
+Írj egy tesztesetet, mely teszteli a kiírást, méghozzá úgy, hogy kiír pár  				 locations.Location példányt, és beolvassa a sorokat egy  List<String> adatszerkezetbe (használd a  Files.readAllLines() metódust)! Utána ebben a listában ellenőrizd szúrópróbaszerűen pl. a második elemet, hogy megfelelő-e. Pl.  Budapest,47.497912,19.040235.
 
 JUnit 4 és 5 használata
 
@@ -103,13 +103,13 @@ Hamcrest
 
 A  LocationService osztályba írj egy metódust, mely egy CSV fájlból felolvassa a benne szereplő kedvenc helyeket.
 
-A visszaadott  List<Location> adatstruktúrára Hamcrest asserteket írj!
+A visszaadott  List<locations.Location> adatstruktúrára Hamcrest asserteket írj!
 
 Saját Hamcrest matcher implementálása
 
 (Opcionális.)
 
-Írj egy olyan Hamcrest matchert, mely azt vizsgálja, hogy egy  Location legalább egyik koordinátája 0! Legyen a neve  LocationWithZeroCoordinate!
+Írj egy olyan Hamcrest matchert, mely azt vizsgálja, hogy egy  locations.Location legalább egyik koordinátája 0! Legyen a neve  LocationWithZeroCoordinate!
 
 AssertJ
 
@@ -117,11 +117,11 @@ A Hamcrest feladatnál írt tesztesetet írd meg úgy is, hogy AssertJ-vel írd 
 
 AssertJ kiterjeszthetőség
 
-Definiálj egy olyan  Condition<Location> feltételt, ami azt vizsgálja, hogy a kedvenc hely legalább egyik koordinátája 0.
+Definiálj egy olyan  Condition<locations.Location> feltételt, ami azt vizsgálja, hogy a kedvenc hely legalább egyik koordinátája 0.
 
 Mockito
 
-Hozz létre egy  LocationRepository interfészt, melynek van egy  Optional<Location> findByName(String name) metódusa!
+Hozz létre egy  LocationRepository interfészt, melynek van egy  Optional<locations.Location> findByName(String name) metódusa!
 
 Hozz létre egy  DistanceService osztályt, abban egy  Optional<Double> calculateDistance(String name1, String name2) metódust! A metódus a két névvel hívja meg a repository  findByName() metódusát! Amennyiben az egyik is  Optional.empty() értékkel tér vissza, adjon vissza egy  Optional.empty() értéket! Amennyiben egyik sem  empty(), adja vissza a kettő közötti távolságot! Egyrészt ellenőrizd, hogy jó névvel lett-e meghívva a  calculateDistance() metódus! Másrészt ellenőrizd nem létező nevekkel és létező nevekkel is a helyes működést. (Mockolni kell a repository-t!)
 
