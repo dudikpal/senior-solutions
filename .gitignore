@@ -1,0 +1,6 @@
+# Project exclude paths
+/daily_spring_tasks/MeetingRooms/target/
+/daily_tasks/target/
+/locations-solution/target/
+/streams-demo/target/
+/video-tasks/employees-spring/target/
