@@ -4,3 +4,4 @@
 /locations-solution/target/
 /streams-demo/target/
 /video-tasks/employees-spring/target/
+*.iml
