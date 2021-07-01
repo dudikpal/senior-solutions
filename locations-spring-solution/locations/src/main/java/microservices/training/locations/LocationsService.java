@@ -1,13 +1,10 @@
 package microservices.training.locations;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
-//@Service
+@Service
 public class LocationsService {
 
     private List<Location> locations = new ArrayList<>(List.of(
