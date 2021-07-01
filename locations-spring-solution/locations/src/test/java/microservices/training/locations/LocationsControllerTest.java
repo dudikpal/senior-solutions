@@ -26,7 +26,7 @@ class LocationsControllerTest {
 
         when(locationsService.getLocations())
                 .thenReturn(List.of(
-                        new Location(1L, "name1", 1.11, 2.22)
+                        new LocationDto(1L, "name1", 1.11, 2.22)
                 ));
 
         assertThat(locationsController.getLocations())
