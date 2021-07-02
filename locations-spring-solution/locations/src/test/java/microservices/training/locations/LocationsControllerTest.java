@@ -7,9 +7,12 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+
+
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -24,13 +27,14 @@ class LocationsControllerTest {
     @Test
     void getLocations() {
 
-        when(locationsService.getLocations())
+        when(locationsService.getLocations(any(), any(), any(), any(), any()))
                 .thenReturn(List.of(
                         new LocationDto(1L, "name1", 1.11, 2.22)
                 ));
 
-        assertThat(locationsController.getLocations())
+        assertThat(locationsController.getLocations(any(), any(), any(), any(), any()))
+                .extracting("name")
                 .contains("name1")
-                .contains("1.11");
+                .doesNotContain("name3");
     }
 }

@@ -3,8 +3,9 @@ package microservices.training.locations;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LocationsServiceTest {
 
@@ -15,10 +16,14 @@ class LocationsServiceTest {
     void getLocations() {
         locationsService = new LocationsService(modelMapper);
 
-        assertThat(locationsService.getLocations())
-                .hasSize(2)
+        assertThat(locationsService.getLocations(Optional.empty(),
+                Optional.empty(),
+                Optional.empty(),
+                Optional.empty(),
+                Optional.empty()))
+                .hasSize(3)
                 .extracting("name")
                 .contains("name1")
-                .doesNotContain("name3");
+                .doesNotContain("name4");
     }
 }

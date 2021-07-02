@@ -3,27 +3,56 @@ package microservices.training.locations;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Collectors;
 
 @Service
 public class LocationsService {
 
     private ModelMapper modelMapper;
 
+    private AtomicLong id = new AtomicLong();
+
     private List<Location> locations = new ArrayList<>(List.of(
-            new Location(1L, "name1", 2.22, 3.33),
-            new Location(2L, "name2", 5.55, 4.44)
+            new Location(id.incrementAndGet(), "name1", 1.11, 2.22),
+            new Location(id.incrementAndGet(), "name2", 2.22, 3.33),
+            new Location(id.incrementAndGet(), "name3", 4.44, 5.55)
     ));
+
 
     public LocationsService(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
     }
 
-    public List<LocationDto> getLocations() {
+
+    public List<LocationDto> getLocations(Optional<String> name,
+                                          Optional<Double> minLat,
+                                          Optional<Double> minLon,
+                                          Optional<Double> maxLat,
+                                          Optional<Double> maxLon) {
         Type targetListType = new TypeToken<List<LocationDto>>(){}.getType();
-        return modelMapper.map(locations, targetListType);
+        List<Location> filtered = locations.stream()
+                .filter(loc -> name.isEmpty() || loc.getName().equalsIgnoreCase(name.get()))
+                .filter(loc -> minLat.isEmpty() || loc.getLat() >= minLat.get())
+                .filter(loc -> maxLat.isEmpty() || loc.getLat() <= maxLat.get())
+                .filter(loc -> minLon.isEmpty() || loc.getLon() >= minLon.get())
+                .filter(loc -> maxLon.isEmpty() || loc.getLon() <= maxLon.get())
+                .collect(Collectors.toList());
+
+        return modelMapper.map(filtered, targetListType);
+    }
+
+    public LocationDto findById(long id) {
+        Location location = locations.stream()
+                .filter(loc -> loc.getId() == id)
+                .findFirst()
+                .get();
+        return modelMapper.map(location, LocationDto.class);
     }
 }
