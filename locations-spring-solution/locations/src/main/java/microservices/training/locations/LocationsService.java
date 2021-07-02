@@ -3,6 +3,8 @@ package microservices.training.locations;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.lang.reflect.Type;
@@ -11,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Service
 public class LocationsService {
@@ -54,5 +57,33 @@ public class LocationsService {
                 .findFirst()
                 .get();
         return modelMapper.map(location, LocationDto.class);
+    }
+
+
+    public LocationDto createLocation(CreateLocationCommand command) {
+            Location location = new Location(id.incrementAndGet(), command.getName(), command.getLat(), command.getLon());
+            locations.add(location);
+            return modelMapper.map(location, LocationDto.class);
+    }
+
+    public void deleteLocation(long id) {
+        Location location = locations.stream()
+                .filter(loc -> loc.getId() == id)
+                .findFirst()
+                .get();
+        locations.remove(location);
+    }
+
+    public LocationDto updateLocation(long id, UpdateLocationCommand command) {
+        int index = IntStream.range(0, locations.size())
+                .filter(i -> locations.get(i).getId() == id)
+                .findFirst()
+                .getAsInt();
+
+        locations.get(index).setName(command.getName());
+        locations.get(index).setLat(command.getLat());
+        locations.get(index).setLon(command.getLon());
+
+        return modelMapper.map(locations.get(index), LocationDto.class);
     }
 }

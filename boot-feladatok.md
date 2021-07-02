@@ -17,7 +17,7 @@ Kérlek jelöld be, hogy melyik gyakorlati feladatokat oldottad meg!
 * [ ] Feltöltés GIT repository-ba
 * [x] REST webszolgáltatások - GET művelet
 * [x] GET műveletek paraméterezése
-* [ ] REST webszolgáltatások POST és DELETE művelet
+* [x] REST webszolgáltatások POST és DELETE művelet
 * [ ] Státuszkódok és hibakezelés
 * [ ] Integrációs tesztelés
 * [ ] Swagger UI

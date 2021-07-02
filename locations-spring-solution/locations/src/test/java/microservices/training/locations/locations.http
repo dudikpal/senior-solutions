@@ -1,3 +1,27 @@
+PUT http://localhost:8080/locations/1
+Content-Type: application/json
+
+{
+  "name": "name4",
+  "lat": "6.66",
+  "lon": "7.77"
+}
+
+###
+DELETE http://localhost:8080/locations/2
+
+###
+POST http://localhost:8080/locations
+Content-Type: application/json
+
+{
+  "name": "name4",
+  "lat": "6.66",
+  "lon": "7.77"
+}
+
+
+###
 GET http://localhost:8080/locations
 Accept: application/json
 
