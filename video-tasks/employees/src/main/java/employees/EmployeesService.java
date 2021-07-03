@@ -27,11 +27,6 @@ public class EmployeesService {
     }
 
 
-    /*public List<EmployeeDto> listEmployees() {
-        Type targetListType = new TypeToken<List<EmployeeDto>>(){}.getType();
-        return modelMapper.map(employees, targetListType);
-    }*/
-
     public List<EmployeeDto> listEmployees(Optional<String> prefix) {
         Type targetListType = new TypeToken<List<EmployeeDto>>(){}.getType();
         List<Employee> filtered = employees.stream()
@@ -70,5 +65,10 @@ public class EmployeesService {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Employee not found " + id));
         employees.remove(employee);
+    }
+
+    public void deleteAllEmployees() {
+        idGenerator = new AtomicLong();
+        employees.clear();
     }
 }
