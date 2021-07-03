@@ -7,7 +7,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.zalando.problem.Problem;
 import org.zalando.problem.Status;
-/*import javax.validation.Valid;*/
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -39,7 +39,7 @@ public class LocationsController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public LocationDto createLocation(/*@Valid*/ @RequestBody CreateLocationCommand command) {
+    public LocationDto createLocation(@Valid @RequestBody CreateLocationCommand command) {
         return locationsService.createLocation(command);
     }
 
@@ -70,7 +70,7 @@ public class LocationsController {
                 .body(problem);
     }
 
-    /*@ExceptionHandler(MethodArgumentNotValidException.class)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Problem> handleValidException(MethodArgumentNotValidException exception) {
         List<Violation> violations = exception.getBindingResult()
                 .getFieldErrors().stream()
@@ -88,5 +88,5 @@ public class LocationsController {
                 .status(HttpStatus.BAD_REQUEST)
                 .contentType(MediaType.APPLICATION_PROBLEM_JSON)
                 .body(problem);
-    }*/
+    }
 }

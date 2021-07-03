@@ -87,7 +87,7 @@ public class EmployeesController {
                 .withType(URI.create("employees/not-valid"))
                 .withStatus(Status.BAD_REQUEST)
                 .withDetail(exception.getMessage())
-                .with("vialations", violations)
+                .with("violations", violations)
                 .build();
 
         return ResponseEntity

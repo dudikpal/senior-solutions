@@ -8,7 +8,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:8080/locations/7
+DELETE http://localhost:8080/locations/1
 
 ###
 POST http://localhost:8080/locations
