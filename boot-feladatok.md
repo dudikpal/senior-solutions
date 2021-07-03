@@ -18,13 +18,13 @@ Kérlek jelöld be, hogy melyik gyakorlati feladatokat oldottad meg!
 * [x] REST webszolgáltatások - GET művelet
 * [x] GET műveletek paraméterezése
 * [x] REST webszolgáltatások POST és DELETE művelet
-* [ ] Státuszkódok és hibakezelés
+* [x] Státuszkódok és hibakezelés
 * [x] Integrációs tesztelés
 * [ ] Swagger UI
 * [ ] Tesztelés Rest Assured használatával
 * [ ] Rest Assured séma validáció
 * [ ] Content Negotiation
-* [ ] Validáció
+* [x] Validáció
 * [ ] Spring Boot konfiguráció
 * [ ] Spring Boot naplózás
 * [ ] Spring JdbcTemplate
