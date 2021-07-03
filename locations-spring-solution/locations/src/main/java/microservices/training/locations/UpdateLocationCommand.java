@@ -6,6 +6,6 @@ import lombok.Data;
 public class UpdateLocationCommand {
 
     private String name;
-    private double lat;
-    private double lon;
+    private Double lat;
+    private Double lon;
 }

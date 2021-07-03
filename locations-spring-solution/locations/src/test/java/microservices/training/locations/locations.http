@@ -2,9 +2,9 @@ PUT http://localhost:8080/locations/1
 Content-Type: application/json
 
 {
-  "name": "name4",
-  "lat": "6.66",
-  "lon": "7.77"
+  "name": "name5",
+  "lat": "",
+  "lon": 7.77
 }
 
 ###

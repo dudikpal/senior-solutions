@@ -80,10 +80,21 @@ public class LocationsService {
                 .findFirst()
                 .getAsInt();
 
-        locations.get(index).setName(command.getName());
-        locations.get(index).setLat(command.getLat());
-        locations.get(index).setLon(command.getLon());
+        if (!command.getName().isEmpty()) {
+            locations.get(index).setName(command.getName());
+        }
+        if (command.getLat() != null) {
+            locations.get(index).setLat(command.getLat());
+        }
+        if (command.getLon() != null) {
+            locations.get(index).setLon(command.getLon());
+        }
 
         return modelMapper.map(locations.get(index), LocationDto.class);
+    }
+
+    public void deleteAllLocations() {
+        id = new AtomicLong();
+        locations.clear();
     }
 }
