@@ -1,0 +1,37 @@
+POST http://localhost:8080/api/movies
+Content-Type: application/json
+Accept: application/json
+
+{
+"title": "tita1",
+"length": 120
+}
+###
+
+POST http://localhost:8080/api/movies
+Content-Type: application/json
+
+{
+  "title": "tita2",
+  "length": 220
+}
+###
+GET http://localhost:8080/api/movies
+Accept: application/json
+
+###
+GET http://localhost:8080/api/movies?title=tita1
+Accept: application/json
+
+###
+PUT http://localhost:8080/api/movies/1/rating
+Accept: application/json
+Content-Type: application/json
+
+{
+"rating": 2
+}
+###
+DELETE http://localhost:8080/api/movies/1
+Content-Type: application/json
+###
