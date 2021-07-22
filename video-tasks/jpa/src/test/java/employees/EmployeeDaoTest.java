@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,6 +64,14 @@ class EmployeeDaoTest {
 
         List<Employee> employees = employeeDao.listAll();
         assertTrue(employees.isEmpty());
+    }
+
+    @Test
+    void testEmployeeWithAttributes() {
+        employeeDao.save(new Employee("jo Doe", Employee.EmployeeType.HALF_TIME, LocalDate.of(2000, 1, 1)));
+        Employee employee = employeeDao.listAll().get(0);
+        System.out.println(employee);
+        assertEquals(LocalDate.of(2000, 1, 1), employee.getDateOfBirth());
     }
 
 }
