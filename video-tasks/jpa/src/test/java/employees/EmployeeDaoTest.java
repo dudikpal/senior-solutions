@@ -10,6 +10,8 @@ import javax.persistence.Persistence;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -112,6 +114,43 @@ class EmployeeDaoTest {
         }
         employeeDao.updateEmployeeNames();
 
+    }
+
+    @Test
+    void testNicknames() {
+        Employee employee = new Employee("John Doe");
+        employee.setNicknames(Set.of("nick1", "N"));
+        employeeDao.save(employee);
+
+        Employee another = employeeDao.findEmployeeByIdWithNicknames(employee.getId());
+        //System.out.println(another.getNicknames());
+        assertEquals(Set.of("nick1", "N"), another.getNicknames());
+    }
+
+    @Test
+    void testVacations() {
+        Employee employee = new Employee("John Doe");
+        employee.setVacationBookings(Set.of(
+                new VacationEntry(LocalDate.of(2018, 1, 1), 4),
+                new VacationEntry(LocalDate.of(2018, 2, 15), 2)
+        ));
+
+        employeeDao.save(employee);
+        Employee another = employeeDao.findEmployeeByIdWithVacations(employee.getId());
+        System.out.println(another.getVacationBookings());
+        assertEquals(2, another.getVacationBookings().size());
+    }
+
+    @Test
+    void testPhonenumbers() {
+        Employee employee = new Employee("John Doe");
+        employee.setPhoneNumbers(Map.of(
+                "home", "1234",
+                "work", "43221"
+        ));
+        employeeDao.save(employee);
+        Employee another = employeeDao.findEmployeeByIdWithPhoneNumbers(employee.getId());
+        assertEquals("1234", another.getPhoneNumbers().get("home"));
     }
 
 }
