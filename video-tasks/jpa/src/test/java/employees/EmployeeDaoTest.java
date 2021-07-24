@@ -74,4 +74,14 @@ class EmployeeDaoTest {
         assertEquals(LocalDate.of(2000, 1, 1), employee.getDateOfBirth());
     }
 
+    @Test
+    void testEmployeeWithAttributesId() {
+        for (int i = 0; i < 10; i++) {
+            employeeDao.save(new Employee("John Doe", Employee.EmployeeType.HALF_TIME,
+                    LocalDate.of(2000, 1, 1)));
+        }
+        Employee employee = employeeDao.listAll().get(0);
+        assertEquals(LocalDate.of(2000, 1, 1), employee.getDateOfBirth());
+    }
+
 }

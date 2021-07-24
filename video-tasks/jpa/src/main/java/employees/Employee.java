@@ -11,7 +11,8 @@ public class Employee {
     public enum EmployeeType {FULL_TIME, HALF_TIME}
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "Emp_Gen")
+    @TableGenerator(name = "Emp_Gen", table = "emp_id_gen", pkColumnName = "gen_name", valueColumnName = "gen_val")
     private Long id;
 
     @Column(name = "emp_name", length = 200, nullable = false)
