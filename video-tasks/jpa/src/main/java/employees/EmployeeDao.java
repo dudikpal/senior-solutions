@@ -22,7 +22,9 @@ public class EmployeeDao {
 
     public Employee findById(Long id) {
         EntityManager em = entityManagerFactory.createEntityManager();
-        return em.find(Employee.class, id);
+        Employee employee = em.find(Employee.class, id);
+        em.close();
+        return employee;
     }
 
     public void changeName(Long id, String name) {
@@ -46,8 +48,31 @@ public class EmployeeDao {
     public List<Employee> listAll() {
 
         EntityManager em = entityManagerFactory.createEntityManager();
-        return em.createQuery("select e from Employee e order by e.name", Employee.class).getResultList();
+        List<Employee> employees = em.createQuery("select e from Employee e order by e.name", Employee.class).getResultList();
+        em.close();
+        return employees;
     }
 
+    public void updateEmployeeNames() {
+
+        EntityManager em = entityManagerFactory.createEntityManager();
+        List<Employee> employees = em.createQuery("select e from Employee e order by e.name", Employee.class).getResultList();
+        em.getTransaction().begin();
+        for (Employee employee : employees) {
+            employee.setName(employee.getName() + "***");
+            System.out.println("Changed");
+            em.flush();
+        }
+        em.getTransaction().commit();
+        em.close();
+    }
+
+    public void updateEmployee(Employee employee) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+        em.merge(employee);
+        em.getTransaction().commit();
+        em.close();
+    }
 
 }

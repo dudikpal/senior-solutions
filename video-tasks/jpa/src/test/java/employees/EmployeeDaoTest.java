@@ -12,8 +12,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class EmployeeDaoTest {
 
@@ -82,6 +81,37 @@ class EmployeeDaoTest {
         }
         Employee employee = employeeDao.listAll().get(0);
         assertEquals(LocalDate.of(2000, 1, 1), employee.getDateOfBirth());
+    }
+
+    @Test
+    void testSaveEmployeeChangeState() {
+        Employee employee = new Employee("John Doe");
+        employeeDao.save(employee);
+        employee.setName("Jack Dao");
+        Employee another = employeeDao.findById(employee.getId());
+
+        assertEquals("John Doe", another.getName());
+        assertFalse(employee == another);
+    }
+
+    @Test
+    void testMerge() {
+        Employee employee = new Employee("John Doe");
+        employeeDao.save(employee);
+
+        employee.setName("Jack Doe");
+        employeeDao.updateEmployee(employee);
+
+        assertEquals("Jack Doe", employeeDao.findById(employee.getId()).getName());
+    }
+
+    @Test
+    void testFlush() {
+        for (int i = 0; i < 10; i++) {
+            employeeDao.save(new Employee("John Doe" + i));
+        }
+        employeeDao.updateEmployeeNames();
+
     }
 
 }

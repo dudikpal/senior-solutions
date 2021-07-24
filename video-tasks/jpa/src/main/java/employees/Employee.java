@@ -36,6 +36,11 @@ public class Employee {
         this.dateOfBirth = dateOfBirth;
     }
 
+    @PostPersist
+    public void debugPersist() {
+        System.out.println(name + " " + id);
+    }
+
     public Long getId() {
         return id;
     }
