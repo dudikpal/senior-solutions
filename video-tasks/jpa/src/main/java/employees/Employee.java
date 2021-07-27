@@ -2,8 +2,7 @@ package employees;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "employees")
@@ -36,11 +35,19 @@ public class Employee {
     @AttributeOverride(name = "daysTaken", column = @Column(name = "days"))
     private Set<VacationEntry> vacationBookings;
 
-    @ElementCollection
+    /*@ElementCollection
     @CollectionTable(name = "phone_numbers", joinColumns = @JoinColumn(name = "emp_id"))
     @MapKeyColumn(name = "phone_type")
     @Column(name = "phone_number")
-    private Map<String, String> phoneNumbers;
+    private Map<String, String> phoneNumbers;*/
+
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE},  mappedBy = "employee")
+    //@OrderBy("type")
+    @OrderColumn(name = "pos")
+    private List<PhoneNumber> phoneNumbers;
+
+    @ManyToMany(mappedBy = "employees")
+    private Set<Project> projects = new HashSet<>();
 
     public Employee() {
     }
@@ -55,9 +62,28 @@ public class Employee {
         this.dateOfBirth = dateOfBirth;
     }
 
+    @OneToOne
+    private ParkingPlace parkingPlace;
+
     @PostPersist
     public void debugPersist() {
         System.out.println(name + " " + id);
+    }
+
+    public void addPhoneNumber(PhoneNumber phoneNumber) {
+        if (phoneNumbers == null) {
+            phoneNumbers = new ArrayList<>();
+        }
+        phoneNumbers.add(phoneNumber);
+        phoneNumber.setEmployee(this);
+    }
+
+    public Set<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
     }
 
     public Long getId() {
@@ -108,11 +134,27 @@ public class Employee {
         this.vacationBookings = vacationBookings;
     }
 
-    public Map<String, String> getPhoneNumbers() {
+    /*public Map<String, String> getPhoneNumbers() {
         return phoneNumbers;
     }
 
     public void setPhoneNumbers(Map<String, String> phoneNumbers) {
+        this.phoneNumbers = phoneNumbers;
+    }*/
+
+    public ParkingPlace getParkingPlace() {
+        return parkingPlace;
+    }
+
+    public void setParkingPlace(ParkingPlace parkingPlace) {
+        this.parkingPlace = parkingPlace;
+    }
+
+    public List<PhoneNumber> getPhoneNumbers() {
+        return phoneNumbers;
+    }
+
+    public void setPhoneNumbers(List<PhoneNumber> phoneNumbers) {
         this.phoneNumbers = phoneNumbers;
     }
 
