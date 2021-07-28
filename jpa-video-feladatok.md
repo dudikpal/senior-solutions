@@ -10,6 +10,6 @@
 * [x] Entitások életciklusa
 * [x] Többértékű attribútumok
 * [x] Kapcsolatok
-* [ ] Lekérdezések
-* [ ] Haladó lekérdezések
+* [x] Lekérdezések
+* [x] Haladó lekérdezések
 * [ ] Deklaratív tranzakciókezelés
