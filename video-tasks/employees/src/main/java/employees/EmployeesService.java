@@ -17,8 +17,6 @@ import java.util.stream.Collectors;
 @Slf4j
 public class EmployeesService {
 
-    //private static final Logger log = LoggerFactory.getLogger(EmployeesService.class);
-
     private ModelMapper modelMapper;
 
     private AtomicLong idGenerator = new AtomicLong();
