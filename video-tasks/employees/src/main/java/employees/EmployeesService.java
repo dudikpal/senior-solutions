@@ -1,8 +1,11 @@
 package employees;
 
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
@@ -11,7 +14,10 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class EmployeesService {
+
+    //private static final Logger log = LoggerFactory.getLogger(EmployeesService.class);
 
     private ModelMapper modelMapper;
 
@@ -47,6 +53,8 @@ public class EmployeesService {
     public EmployeeDto createEmployee(CreateEmployeeCommand command) {
         Employee employee = new Employee(idGenerator.incrementAndGet(), command.getName());
         employees.add(employee);
+        log.info("Employee has been created");
+        log.debug("Employee has been created with name {}", command.getName());
         return modelMapper.map(employee, EmployeeDto.class);
     }
 
