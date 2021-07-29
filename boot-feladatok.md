@@ -28,7 +28,7 @@ Kérlek jelöld be, hogy melyik gyakorlati feladatokat oldottad meg!
 * [ ] Spring Boot konfiguráció
 * [x] Spring Boot naplózás
 * [ ] Spring JdbcTemplate
-* [ ] Spring Data JPA
+* [x] Spring Data JPA
 * [ ] MariaDB
 * [ ] Integrációs tesztelés
 * [ ] Alkalmazás futtatása Dockerben MariaDB-vel
