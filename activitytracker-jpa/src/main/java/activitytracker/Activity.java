@@ -31,9 +31,23 @@ public class Activity {
     @Enumerated(EnumType.STRING)
     private ActivityType type;
 
+    private LocalDateTime createdAt;
+
+    private LocalDateTime updatedAt;
+
     public Activity(LocalDateTime startTime, String description, ActivityType type) {
         this.startTime = startTime;
         this.description = description;
         this.type = type;
+    }
+
+    @PrePersist
+    public void initCreateAt() {
+        createdAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void initUpdateAt() {
+        updatedAt = LocalDateTime.now();
     }
 }

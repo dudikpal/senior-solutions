@@ -72,4 +72,17 @@ class ActivityDaoTest {
         List<Activity> activities = activityDao.listActivities();
         assertEquals(2, activities.size());
     }
+
+    @Test
+    void test_update_activity_description() {
+        activityDao.saveActivity(new Activity(LocalDateTime.of(2000, 1, 1, 1, 1), "description of a1", ActivityType.BASKETBALL));
+
+        Activity activity = activityDao.findActivityById(1L);
+
+        String desc = "New description";
+        activityDao.updateActivity(1, desc);
+
+        Activity another = activityDao.findActivityById(1L);
+        assertEquals(desc, another.getDescription());
+    }
 }
