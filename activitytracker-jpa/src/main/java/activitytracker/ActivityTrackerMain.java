@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class ActivityTrackerMain {
 
@@ -21,6 +22,26 @@ public class ActivityTrackerMain {
         atm.createActivity(new Activity(LocalDateTime.of(2000, 3, 1, 3, 3), "description of a4", ActivityType.RUNNING));
         atm.createActivity(new Activity(LocalDateTime.of(2001, 3, 1, 3, 3), "description of a5", ActivityType.RUNNING));
 
+        List<Activity> activities = em.createQuery("select a from Activity a").getResultList();
+        em.close();
+        System.out.println(activities);
+
+        em = atm.factory.createEntityManager();
+        Activity activity = em.find(Activity.class, 3L);
+        System.out.println(activity);
+
+        em = atm.factory.createEntityManager();
+        activity = em.find(Activity.class, 1L);
+        activity.setDescription("New desc to a1");
+        System.out.println(em.find(Activity.class, 1L).getDescription());
+
+        em = atm.factory.createEntityManager();
+        activity = em.find(Activity.class, 1L);
+        em.getTransaction().begin();
+        em.remove(activity);
+        em.getTransaction().commit();
+        System.out.println(em.createQuery("select a from Activity a").getResultList());
+        em.close();
 
         atm.factory.close();
     }
