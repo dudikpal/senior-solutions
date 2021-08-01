@@ -85,4 +85,20 @@ class ActivityDaoTest {
         Activity another = activityDao.findActivityById(1L);
         assertEquals(desc, another.getDescription());
     }
+
+    @Test
+    void test_list_all_with_labels() {
+        Activity a1 = new Activity(LocalDateTime.of(2000, 1, 1, 1, 1), "description of a1", ActivityType.BASKETBALL);
+        a1.setLabels(List.of("label1 a1", "label2 a1"));
+
+        activityDao.saveActivity(a1);
+
+        Activity another1 = activityDao.findActivityByIdWithLabels(a1.getId());
+
+        assertThat(another1.getLabels())
+                .hasSize(2)
+                //.extracting(String::new)
+                .containsExactly("label1 a1", "label2 a1");
+
+    }
 }

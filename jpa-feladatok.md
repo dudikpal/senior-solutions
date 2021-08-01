@@ -7,8 +7,8 @@
 * [x] Architektúra és integrációs tesztelés
 * [x] Entitások konfigurálása
 * [x] Elsődleges kulcs
-* [ ] Entitások életciklusa
-* [ ] Többértékű attribútumok
+* [x] Entitások életciklusa
+* [x] Többértékű attribútumok
 * [ ] Kapcsolatok
 * [ ] Lekérdezések
 * [ ] Haladó lekérdezések

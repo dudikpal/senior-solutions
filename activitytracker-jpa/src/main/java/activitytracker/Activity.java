@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "activities")
@@ -34,6 +36,9 @@ public class Activity {
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
+
+    @ElementCollection
+    private List<String> labels = new ArrayList<>();
 
     public Activity(LocalDateTime startTime, String description, ActivityType type) {
         this.startTime = startTime;
