@@ -12,8 +12,13 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Activity {
 
+    @TableGenerator(name = "Activity_Gen",
+            table = "act_id_gen",
+            pkColumnName = "id_gen",
+            pkColumnValue = "id_val"
+    )
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "Activity_Gen")
     private Long id;
 
     @Column(name = "start_time", nullable = false)
