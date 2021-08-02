@@ -33,12 +33,18 @@ public class Activity {
     @Enumerated(EnumType.STRING)
     private ActivityType type;
 
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @ElementCollection
-    private List<String> labels = new ArrayList<>();
+    /*@ElementCollection
+    private List<String> labels = new ArrayList<>();*/
+
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, mappedBy = "activity")
+    @OrderBy("time")
+    private List<TrackPoint> trackPoints;
 
     public Activity(LocalDateTime startTime, String description, ActivityType type) {
         this.startTime = startTime;
@@ -54,5 +60,13 @@ public class Activity {
     @PreUpdate
     public void initUpdateAt() {
         updatedAt = LocalDateTime.now();
+    }
+
+    public void addTrackPoint(TrackPoint trackPoint) {
+        if (trackPoints == null) {
+            trackPoints = new ArrayList<>();
+        }
+        trackPoints.add(trackPoint);
+        trackPoint.setActivity(this);
     }
 }

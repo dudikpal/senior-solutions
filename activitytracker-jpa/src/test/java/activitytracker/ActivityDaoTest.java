@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
@@ -86,7 +87,7 @@ class ActivityDaoTest {
         assertEquals(desc, another.getDescription());
     }
 
-    @Test
+    /*@Test
     void test_list_all_with_labels() {
         Activity a1 = new Activity(LocalDateTime.of(2000, 1, 1, 1, 1), "description of a1", ActivityType.BASKETBALL);
         a1.setLabels(List.of("label1 a1", "label2 a1"));
@@ -99,6 +100,26 @@ class ActivityDaoTest {
                 .hasSize(2)
                 //.extracting(String::new)
                 .containsExactly("label1 a1", "label2 a1");
+
+    }*/
+
+    @Test
+    void test_list_all_with_trackpoints() {
+        Activity activity = new Activity(LocalDateTime.of(2000, 1, 1, 1, 1), "description text", ActivityType.BIKING);
+        activity.addTrackPoint(new TrackPoint(LocalDate.of(2000, 2, 1), 2.22, 1.11));
+        activity.addTrackPoint(new TrackPoint(LocalDate.of(2000, 1, 2), 3.22, 2.11));
+        activity.addTrackPoint(new TrackPoint(LocalDate.of(2000, 1, 1), 4.22, 3.11));
+
+        activityDao.saveActivity(activity);
+
+        long id = activity.getId();
+
+        Activity another = activityDao.findActivityByIdWithTrackPoints(id);
+
+        assertThat(another.getTrackPoints())
+                .hasSize(3)
+                .extracting(TrackPoint::getLat)
+                .containsExactly(4.22, 3.22, 2.22);
 
     }
 }
