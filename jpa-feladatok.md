@@ -10,7 +10,7 @@
 * [x] Kapcsolatok
 * [x] Több-több kapcsolatok
 * [x] Entitások mapekben
-* [ ] Beágyazott objektumok és másodlagos tábla
+* [x] Beágyazott objektumok és másodlagos tábla
 * [ ] Öröklődés
 * [ ] Lekérdezések
 * [ ] Haladó lekérdezések

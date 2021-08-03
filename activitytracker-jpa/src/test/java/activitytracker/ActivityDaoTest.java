@@ -123,7 +123,19 @@ class ActivityDaoTest {
 
     }
 
+    @Test
+    void test_Activity_Details() {
+        Activity activity = new Activity(LocalDateTime.of(2000, 1, 1, 1, 1), "description", ActivityType.HIKING);
+        activity.setDistance(1000);
+        activity.setDuration(100);
 
+        activityDao.saveActivity(activity);
+
+        Activity another = activityDao.findActivityById(activity.getId());
+
+        assertEquals(1000, another.getDistance());
+
+    }
 
 
 }

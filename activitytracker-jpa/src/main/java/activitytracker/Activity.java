@@ -10,6 +10,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "activities")
+@SecondaryTable(name = "activity_details",
+pkJoinColumns = @PrimaryKeyJoinColumn(name = "act_id"))
 @Data
 @NoArgsConstructor
 public class Activity {
@@ -48,6 +50,12 @@ public class Activity {
 
     @ManyToMany
     private List<Area> areas = new ArrayList<>();
+
+    @Column(table = "activity_details")
+    private int distance;
+
+    @Column(table = "activity_details")
+    private int duration;
 
     public Activity(LocalDateTime startTime, String description, ActivityType type) {
         this.startTime = startTime;
