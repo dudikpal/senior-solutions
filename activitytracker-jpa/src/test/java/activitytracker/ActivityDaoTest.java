@@ -137,5 +137,31 @@ class ActivityDaoTest {
 
     }
 
+    @Test
+    void test_list_trackpoints_after_date() {
+        Activity a1 = new Activity(LocalDateTime.of(2017, 1, 1, 1, 1), "desc a1", ActivityType.BIKING);
+        Activity a2 = new Activity(LocalDateTime.of(2019, 1, 1, 1, 1), "desc a1", ActivityType.BIKING);
+        Activity a3 = new Activity(LocalDateTime.of(2018, 2, 1, 1, 1), "desc a1", ActivityType.BIKING);
+        Activity a4 = new Activity(LocalDateTime.of(2018, 2, 1, 1, 1), "desc a1", ActivityType.BIKING);
+        Activity a5 = new Activity(LocalDateTime.of(2018, 2, 1, 1, 1), "desc a1", ActivityType.BIKING);
+
+        a1.addTrackPoint(new TrackPoint(LocalDate.of(2000, 1, 1), 1.11, 2.22));
+        a2.addTrackPoint(new TrackPoint(LocalDate.of(2000, 1, 1), 3.11, 4.22));
+        a3.addTrackPoint(new TrackPoint(LocalDate.of(2000, 1, 1), 5.11, 6.22));
+        a4.addTrackPoint(new TrackPoint(LocalDate.of(2000, 1, 1), 7.11, 8.22));
+        a5.addTrackPoint(new TrackPoint(LocalDate.of(2000, 1, 1), 9.11, 16.22));
+
+        activityDao.saveActivity(a1);
+        activityDao.saveActivity(a2);
+        activityDao.saveActivity(a3);
+        activityDao.saveActivity(a4);
+        activityDao.saveActivity(a5);
+
+        List<CoordinateDto> coordinates = activityDao.findTrackPointCoordinatesByDate(LocalDateTime.of(2018, 01, 01, 0, 0), 2, 2);
+        System.out.println();
+        assertEquals(2, coordinates.size());
+        assertEquals(9.11, coordinates.get(1).getLat(), 0.00005);
+        assertEquals(16.22, coordinates.get(1).getLon(), 0.00005);
+    }
 
 }

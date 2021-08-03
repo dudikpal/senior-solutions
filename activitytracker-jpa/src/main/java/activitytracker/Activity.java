@@ -12,6 +12,8 @@ import java.util.List;
 @Table(name = "activities")
 @SecondaryTable(name = "activity_details",
 pkJoinColumns = @PrimaryKeyJoinColumn(name = "act_id"))
+@NamedQuery(name = "listCoordinatesAfterDate",
+        query = "select new activitytracker.CoordinateDto(t.lat, t.lon) from Activity a join a.trackPoints t where a.startTime > :afterThis")
 @Data
 @NoArgsConstructor
 public class Activity {
