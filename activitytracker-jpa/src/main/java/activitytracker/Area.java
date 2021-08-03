@@ -5,7 +5,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Data
@@ -22,7 +24,18 @@ public class Area {
     @ManyToMany(mappedBy = "areas")
     private List<Activity> activities = new ArrayList<>();
 
+    @OneToMany(mappedBy = "area", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @MapKey(name = "name")
+    private Map<String, City> cities = new HashMap<>();
+
     public Area(String name) {
         this.name = name;
     }
+
+
+    public void addCity(City city) {
+        cities.put(city.getName(), city);
+        city.setArea(this);
+    }
+
 }

@@ -1,7 +1,6 @@
 package activitytracker;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -12,6 +11,7 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class AreaDaoTest {
 
     private ActivityDao activityDao;
@@ -53,6 +53,21 @@ class AreaDaoTest {
                 activity.getAreas().stream()
                         .map(Area::getName)
                         .collect(Collectors.toList()));
+    }
+
+    @Test
+    void test_list_all_with_cities() {
+        Area area = new Area("area1");
+        area.addCity(new City("city1Name", 2500));
+        area.addCity(new City("city2Name", 3500));
+        area.addCity(new City("city3Name", 4500));
+
+        areaDao.saveArea(area);
+        long id = area.getId();
+
+        Area another = areaDao.findAreaByIdWithCities(id);
+        assertEquals(3500, another.getCities().get("city2Name").getPopulation());
+
     }
 
 }

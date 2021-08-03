@@ -19,11 +19,21 @@ public class AreaDao {
         em.close();
     }
 
-    public Area findAreaByName(String name) {
+    public Area findById(long id) {
         EntityManager em = factory.createEntityManager();
-        Area area = em.createQuery("select a from Area a join fetch a.activities where a.name = :name",
+        Area area = em.createQuery("select a from Area a where a.id = :id",
                 Area.class)
-                .setParameter("name", name)
+                .setParameter("id", id)
+                .getSingleResult();
+        em.close();
+        return area;
+    }
+
+    public Area findAreaByIdWithCities(long id) {
+        EntityManager em = factory.createEntityManager();
+        Area area = em.createQuery("select a from Area a join fetch a.cities where a.id = :id",
+                Area.class)
+                .setParameter("id", id)
                 .getSingleResult();
         em.close();
         return area;
