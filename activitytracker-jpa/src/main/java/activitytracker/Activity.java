@@ -46,6 +46,9 @@ public class Activity {
     @OrderBy("time")
     private List<TrackPoint> trackPoints;
 
+    @ManyToMany
+    private List<Area> areas = new ArrayList<>();
+
     public Activity(LocalDateTime startTime, String description, ActivityType type) {
         this.startTime = startTime;
         this.description = description;
@@ -68,5 +71,10 @@ public class Activity {
         }
         trackPoints.add(trackPoint);
         trackPoint.setActivity(this);
+    }
+
+    public void addArea(Area area) {
+        areas.add(area);
+        area.getActivities().add(this);
     }
 }
