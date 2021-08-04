@@ -12,4 +12,6 @@
 * [x] Kapcsolatok
 * [x] Lekérdezések
 * [x] Haladó lekérdezések
+* [x] Bulk műveletek
+* [x] JPA Spring Boottal
 * [x] Deklaratív tranzakciókezelés
