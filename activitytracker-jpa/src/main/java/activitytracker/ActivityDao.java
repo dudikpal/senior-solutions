@@ -119,4 +119,16 @@ public class ActivityDao {
         em.close();
         return result;
     }
+
+
+    public void removeActivitiesByDateAndType(LocalDateTime afterThis, ActivityType type) {
+        EntityManager em = factory.createEntityManager();
+        em.getTransaction().begin();
+        em.createQuery("delete Activity a where a.startTime > :afterThis and a.type = :type")
+                .setParameter("afterThis", afterThis)
+                .setParameter("type", type)
+                .executeUpdate();
+        em.getTransaction().commit();
+        em.close();
+    }
 }

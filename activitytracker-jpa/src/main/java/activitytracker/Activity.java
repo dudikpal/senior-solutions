@@ -46,9 +46,9 @@ public class Activity {
     /*@ElementCollection
     private List<String> labels = new ArrayList<>();*/
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, mappedBy = "activity")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "activity")
     @OrderBy("time")
-    private List<TrackPoint> trackPoints;
+    private List<TrackPoint> trackPoints = new ArrayList<>();
 
     @ManyToMany
     private List<Area> areas = new ArrayList<>();

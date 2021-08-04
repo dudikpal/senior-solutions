@@ -185,4 +185,20 @@ class ActivityDaoTest {
         assertEquals("desc activity2", result.get(1)[0]);
     }
 
+    @Test
+    void remove_Activities_By_Date_And_Type() {
+        activityDao.saveActivity(new Activity(LocalDateTime.of(2000, 1, 1, 1, 1), "desc a1", ActivityType.BIKING));
+        activityDao.saveActivity(new Activity(LocalDateTime.of(2001, 1, 1, 1, 1), "desc a2", ActivityType.BIKING));
+        activityDao.saveActivity(new Activity(LocalDateTime.of(2001, 1, 1, 1, 1), "desc a3", ActivityType.HIKING));
+        activityDao.saveActivity(new Activity(LocalDateTime.of(2000, 1, 1, 1, 1), "desc a4", ActivityType.BIKING));
+        activityDao.saveActivity(new Activity(LocalDateTime.of(2001, 1, 1, 1, 1), "desc a5", ActivityType.RUNNING));
+        activityDao.saveActivity(new Activity(LocalDateTime.of(2001, 1, 1, 1, 1), "desc a6", ActivityType.BASKETBALL));
+
+        activityDao.removeActivitiesByDateAndType(LocalDateTime.of(2000, 2, 2, 2, 2), ActivityType.BIKING);
+
+        List<Activity> activities = activityDao.listActivities();
+
+        assertEquals(5, activities.size());
+    }
+
 }
