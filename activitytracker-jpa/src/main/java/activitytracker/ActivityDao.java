@@ -108,4 +108,15 @@ public class ActivityDao {
         em.close();
         return coordinates;
     }
+
+
+    public List<Object[]> findTrackPointCountByActivity() {
+        EntityManager em = factory.createEntityManager();
+        List<Object[]> result = em
+                .createQuery("select a.description, size(a.trackPoints) from Activity a join a.trackPoints group by a.description",
+                        Object[].class)
+                .getResultList();
+        em.close();
+        return result;
+    }
 }

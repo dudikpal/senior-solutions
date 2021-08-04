@@ -164,4 +164,25 @@ class ActivityDaoTest {
         assertEquals(16.22, coordinates.get(1).getLon(), 0.00005);
     }
 
+    @Test
+    void test_find_TrackPoint_Count_By_Activity() {
+        Activity activity1 = new Activity(LocalDateTime.of(2000, 1, 1, 1, 1), "desc activity1", ActivityType.HIKING);
+        Activity activity2 = new Activity(LocalDateTime.of(2000, 1, 1, 1, 1), "desc activity2", ActivityType.BIKING);
+        TrackPoint t1 = new TrackPoint(LocalDate.of(2000, 1, 1), 1.11, 2.22);
+        TrackPoint t2 = new TrackPoint(LocalDate.of(2000, 1, 1), 3.11, 4.22);
+        TrackPoint t3 = new TrackPoint(LocalDate.of(2000, 1, 1), 5.11, 6.22);
+
+        activity1.addTrackPoint(t1);
+        activity1.addTrackPoint(t2);
+        activity2.addTrackPoint(t3);
+
+        activityDao.saveActivity(activity1);
+        activityDao.saveActivity(activity2);
+
+        List<Object[]> result = activityDao.findTrackPointCountByActivity();
+
+        assertEquals(2, result.size());
+        assertEquals("desc activity2", result.get(1)[0]);
+    }
+
 }
