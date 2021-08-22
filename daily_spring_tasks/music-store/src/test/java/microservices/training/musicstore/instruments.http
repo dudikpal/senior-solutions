@@ -2,8 +2,8 @@ POST http://localhost:8080/api/instruments
 Content-Type: application/json
 
 {
-"name": "yahama",
-  "type": "ppp",
+"brand": "yahama",
+  "type": "PIANO",
   "price": 220000
 }
 

@@ -29,8 +29,14 @@ Accept: application/json
 Content-Type: application/json
 
 {
-"rating": 2
+"rating": 5
 }
+###
+###
+GET http://localhost:8080/api/movies/1/rating
+Accept: application/json
+Content-Type: application/json
+
 ###
 DELETE http://localhost:8080/api/movies/1
 Content-Type: application/json

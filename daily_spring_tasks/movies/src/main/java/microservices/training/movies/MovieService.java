@@ -45,6 +45,16 @@ public class MovieService {
                 .get();
     }
 
+
+    public double getRatingmovie(long id) {
+        int index = IntStream.range(0, movies.size())
+                .filter(i -> movies.get(i).getId() == id)
+                .findFirst()
+                .getAsInt();
+        return movies.get(index).getRatingsAvg();
+    }
+
+
     public MovieDto ratingmovie(long id, RatingMovieCommand command) {
         int index = IntStream.range(0, movies.size())
                 .filter(i -> movies.get(i).getId() == id)
@@ -66,4 +76,5 @@ public class MovieService {
         idGenerator = new AtomicLong();
         movies.clear();
     }
+
 }

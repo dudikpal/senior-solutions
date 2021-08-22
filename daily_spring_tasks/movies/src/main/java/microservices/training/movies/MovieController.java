@@ -30,6 +30,13 @@ public class MovieController {
         return movieService.createMovie(command);
     }
 
+
+    @GetMapping("/{id}/rating")
+    public double getRatingMovie(@PathVariable("id") long id) {
+        return movieService.getRatingmovie(id);
+    }
+
+
     @PutMapping("/{id}/rating")
     public MovieDto ratingMovie(@PathVariable("id") long id, @RequestBody RatingMovieCommand command) {
         return movieService.ratingmovie(id, command);
