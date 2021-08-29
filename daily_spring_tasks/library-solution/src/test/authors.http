@@ -1,0 +1,24 @@
+GET http://localhost:8080/api/authors
+Accept: application/json
+
+###
+POST http://localhost:8080/api/authors
+Content-Type: application/json
+
+{
+"name": "Asimov"
+}
+
+###
+
+POST http://localhost:8080/api/authors/1
+Content-Type: application/json
+Accept: application/json
+
+{
+  "isbn": "1224ABCD",
+  "title": "Alapitvany"
+}
+
+###
+DELETE http://localhost:8080/api/authors/1
