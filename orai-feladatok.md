@@ -19,4 +19,4 @@ Kérlek jelöld be, hogy melyik gyakorlati feladatokat oldottad meg!
 * [x] 2021.07.20. - MeetingRooms JPA-val (meetingrooms-jpa), csak repository réteg, DAO osztály adatbázissal
 * [x] 2021.07.26. - Filmek (movie) Spring Data JPA-val, adatbázissal
 * [x] 2021.07.27. - Szerzők, könyvek (author, book), Spring Data JPA-val, adatbázissal
-* [ ] 2021.08.03. - Filmek - Színészek - Stúdiók (movies-actors-studios), előre előkészített repository osztály, saját JPQL lekérdezések gyakorlására
+* [x] 2021.08.03. - Filmek - Színészek - Stúdiók (movies-actors-studios), előre előkészített repository osztály, saját JPQL lekérdezések gyakorlására
