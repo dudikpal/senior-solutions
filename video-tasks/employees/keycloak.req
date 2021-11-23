@@ -1,0 +1,6 @@
+// role-ok
+localhost:8081/auth/realms/EmployeesRealm/.well-known/openid-configuration
+// tanusitvany
+localhost:8081/auth/realms/EmployeesRealm/protocol/openid-connect/certs
+//
+localhost:8081/auth/realms/EmployeesRealm/protocol/openid-connect/token

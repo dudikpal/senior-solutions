@@ -1,3 +1,10 @@
+POST localhost:8081/auth/realms/EmployeesRealm/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password&client_id=employees-app&username=johndoe&password=johndoe
+
+###
+
 ###
 GET http://localhost:8080/
 
