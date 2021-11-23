@@ -1,8 +1,8 @@
 package employees;
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +13,7 @@ import org.zalando.problem.Status;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/employees")
 @Tag(name = "Operations on employees")
+@Slf4j
 public class EmployeesController {
 
     private EmployeesService employeesService;
@@ -29,7 +31,8 @@ public class EmployeesController {
     }
 
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public List<EmployeeDto> listEmployees(@RequestParam Optional<String> prefix) {
+    public List<EmployeeDto> listEmployees(@RequestParam Optional<String> prefix, Principal principal) {
+        log.info("Logged user: {}", principal.getName());
         return employeesService.listEmployees(prefix);
     }
 
